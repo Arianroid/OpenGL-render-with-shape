@@ -18,7 +18,7 @@ import javax.microedition.khronos.opengles.GL10;
 public class HelloESRender implements GLSurfaceView.Renderer {
 
     private FloatBuffer triangle;
-    private float angle =  0.0f;
+     float angle =  0.0f;
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         // Set the background frame color to blue
@@ -31,10 +31,10 @@ public class HelloESRender implements GLSurfaceView.Renderer {
     @Override
     public void onDrawFrame(GL10 gl) {
 
-        SystemClock.sleep(1000);
-        angle +=6;
+       // SystemClock.sleep(1000);
+      //  angle +=6;
         gl.glRotatef(angle,0.0f,0.0f,1.0f);
-        gl.glScalef(1,2,1);
+
 
         //is called like display();method
         //Redraw background color
