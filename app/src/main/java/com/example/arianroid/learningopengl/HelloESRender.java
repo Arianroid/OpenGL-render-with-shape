@@ -1,6 +1,8 @@
 package com.example.arianroid.learningopengl;
 
 import android.opengl.GLSurfaceView;
+import android.opengl.GLU;
+import android.os.SystemClock;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -39,6 +41,29 @@ public class HelloESRender implements GLSurfaceView.Renderer {
         gl.glDrawArrays(GL10.GL_TRIANGLES, 0, 3);
 
 
+        //Redraw background color
+        gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
+
+        // Set GL_MODELVIEW transformation mode
+        gl.glMatrixMode(GL10.GL_MODELVIEW);
+        gl.glLoadIdentity(); //reset matrix
+
+
+        // When using GL_MODELVIEW, you must set the view point.
+        GLU.gluLookAt(gl, 0, 0, 5   //camera at (0, 0, 5)
+                , 0f, 0f, 0f //look at (0,0,0)
+                , 0.0f, 1.0f, 0.0f); //up = (0, 1, 0)
+
+        //rotate about z-axis for 30 degrees
+        gl.glRotatef(30, 0, 0, 1);
+        //magnify triangle by x3 in y-direction
+        gl.glScalef(1, 2, 1);
+
+        // Draw the triangle
+        gl.glColor4f(1.0f, 0.0f, 0.0f, 0.0f);
+        gl.glVertexPointer(3, GL10.GL_FLOAT, 0, triangle);
+        gl.glDrawArrays(GL10.GL_TRIANGLES, 0, 3);
+
 
 
     }
@@ -47,6 +72,24 @@ public class HelloESRender implements GLSurfaceView.Renderer {
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         // is called when the geometry of the GLSurfaceView changes
         gl.glViewport(0, 0, width, height);
+
+        float aspectRatio = (float) width / height;//aspect ratio
+
+        float left, right, bottom, top, nearZ, farZ;
+        bottom = -1.5f;
+        top = 1.5f;
+        nearZ = 3.0f;
+        farZ = 7.0f;
+        left = bottom * aspectRatio;
+        right = top * aspectRatio;
+
+
+        gl.glMatrixMode(GL10.GL_PROJECTION);
+        gl.glLoadIdentity();
+        gl.glFrustumf(left, right, bottom, top, nearZ, farZ);
+        //apply the projection matrix
+
+
     }
 
     private void initShapes() {
