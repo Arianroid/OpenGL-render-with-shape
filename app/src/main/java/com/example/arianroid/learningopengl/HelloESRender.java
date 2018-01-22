@@ -64,31 +64,6 @@ public class HelloESRender implements GLSurfaceView.Renderer {
 
     }
 
-    void rotateByClock() {
-        SystemClock.sleep(1000);
-        angle += 6;
-        gl10.glRotatef(angle, 0.0f, 0.0f, 1.0f);
-
-        gl10.glColor4f(0.1f, 1.0f, 0.1f, 0.3f);
-        gl10.glClearColor(0.1f, 1.0f, 0.1f, 0.3f);
-
-        gl10.glClear(GL10.GL_COLOR_BUFFER_BIT
-                | GL10.GL_DEPTH_BUFFER_BIT);
-
-
-    }
-
-    void changeColorWithClearUI() {
-        gl10.glColor4f(0.1f, 1.0f, 0.1f, 0f);
-        gl10.glClearColor(0.1f, 1.0f, 0.1f, 0f);
-
-        //Redraw background color
-        gl10.glClear(GL10.GL_COLOR_BUFFER_BIT
-                | GL10.GL_DEPTH_BUFFER_BIT);
-
-
-    }
-
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
         // is called when the geometry of the GLSurfaceView changes
@@ -110,6 +85,19 @@ public class HelloESRender implements GLSurfaceView.Renderer {
         gl.glFrustumf(left, right, bottom, top, nearZ, farZ);
         //apply the projection matrix
 
+
+    }
+
+    void changeColorWithClearUI() {
+        //Redraw background color
+        gl10.glClear(GL10.GL_COLOR_BUFFER_BIT
+                | GL10.GL_DEPTH_BUFFER_BIT);
+
+
+        gl10.glClearColor(0.7f, 0.0f, 0.0f, 0f);
+
+        gl10.glClear(GL10.GL_COLOR_BUFFER_BIT
+                | GL10.GL_DEPTH_BUFFER_BIT);
 
     }
 
@@ -136,6 +124,20 @@ public class HelloESRender implements GLSurfaceView.Renderer {
 
         //set the buffer to read the first vertex coordinates
         triangle.position(0);
+
+    }
+
+    void rotateByClock() {
+        SystemClock.sleep(1000);
+        angle += 6;
+        gl10.glRotatef(angle, 0.0f, 0.0f, 1.0f);
+
+        gl10.glColor4f(0.1f, 1.0f, 0.1f, 0.3f);
+        gl10.glClearColor(0.1f, 1.0f, 0.1f, 0.3f);
+
+        gl10.glClear(GL10.GL_COLOR_BUFFER_BIT
+                | GL10.GL_DEPTH_BUFFER_BIT);
+
 
     }
 

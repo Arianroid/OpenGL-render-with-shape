@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     class HelloESSurfaceView extends GLSurfaceView {
         private final float TOUCH_SCALE_FACTOR = 180.0f / 320;
         private HelloESRender render;
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             setRenderer(render);
 
             //Render the view  only when there is a change
-            setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+            setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
         }
 
         @Override
@@ -50,11 +49,7 @@ public class MainActivity extends AppCompatActivity {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_MOVE:
 
-                    render.changeColorWithClearUI();
-                    requestRender();
 
-
-                    /*
                     float dx = x - previousX;
                     float dy = y - previousY;
 
@@ -67,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                         dy = dy * -1;
 
                     render.angle += (dx + dy) * TOUCH_SCALE_FACTOR;
-                    requestRender();*/
+                    requestRender();
                     break;
 
             }
