@@ -23,15 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
 
 
     class HelloESSurfaceView extends GLSurfaceView {
@@ -53,10 +44,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onTouchEvent(MotionEvent event) {
 
+
             float x = event.getX();
             float y = event.getY();
             switch (event.getAction()) {
                 case MotionEvent.ACTION_MOVE:
+
+                    render.changeColorWithClearUI();
+                    requestRender();
+
+
+                    /*
                     float dx = x - previousX;
                     float dy = y - previousY;
 
@@ -69,11 +67,13 @@ public class MainActivity extends AppCompatActivity {
                         dy = dy * -1;
 
                     render.angle += (dx + dy) * TOUCH_SCALE_FACTOR;
-                    requestRender();
+                    requestRender();*/
+                    break;
+
             }
 
-            previousY =y;
-            previousX =x;
+            previousY = y;
+            previousX = x;
             return true;
         }
     }
