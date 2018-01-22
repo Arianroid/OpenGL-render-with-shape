@@ -1,14 +1,10 @@
 package com.example.arianroid.learningopengl;
 
-import android.content.Context;
-import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mGLView = (CustomGLSurface) findViewById(R.id.mainGlSurfaceView);
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,13 +32,13 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.first:
-
+                mGLView.setEnum(GLUenum.ROTATE_X);
                 break;
             case R.id.second:
-
+                mGLView.setEnum(GLUenum.ROTATE_Y);
                 break;
             case R.id.third:
-
+                mGLView.setEnum(GLUenum.ROTATE_Z);
                 break;
         }
 

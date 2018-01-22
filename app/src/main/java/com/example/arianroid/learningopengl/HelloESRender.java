@@ -13,12 +13,19 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class HelloESRender implements GLSurfaceView.Renderer {
 
-    public static float angle = 0.0f;
+    public float angle = 0.0f;
     GL10 gl10;
     private FloatBuffer triangle;
+    private int[] rotateParam = new int[]{1, 0, 0};
 
-    public static void setAngle(float angle) {
-        HelloESRender.angle += angle;
+
+
+    void setAngle(float angle) {
+        this.angle += angle;
+    }
+
+    public void setRotateParam(int[] rotateParam) {
+        this.rotateParam = rotateParam;
     }
 
     @Override
@@ -56,7 +63,7 @@ public class HelloESRender implements GLSurfaceView.Renderer {
                 , 0.0f, 1.0f, 0.0f); //up = (0, 1, 0)
 
         //rotate about z-axis for 30 degrees
-        gl10.glRotatef(angle, 0, 1, 0);//rotate state customation
+        gl10.glRotatef(angle, rotateParam[0], rotateParam[1], rotateParam[2]);//rotate state customation
 
         //magnify triangle by x3 in y-direction
         gl10.glScalef(1, 1, 1);

@@ -9,18 +9,13 @@ import android.view.MotionEvent;
 public class CustomGLSurface extends GLSurfaceView {
 
 
-    public static HelloESRender render =new HelloESRender();
+    public HelloESRender render = new HelloESRender();
     private final float TOUCH_SCALE_FACTOR = 180.0f / 320;
     private float previousX;
     private float previousY;
 
-    public static void setRender(HelloESRender render) {
-        CustomGLSurface.render = render;
-    }
-
     public CustomGLSurface(Context context) {
         super(context);
-
         setRenderer(render);
         //Render the view  only when there is a change
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
@@ -32,6 +27,21 @@ public class CustomGLSurface extends GLSurfaceView {
         //Render the view  only when there is a change
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
 
+    }
+
+    public void setEnum(GLUenum glUenum) {
+        switch (glUenum) {
+            case ROTATE_X:
+                render.setRotateParam(new int[]{1, 0, 0});
+                break;
+            case ROTATE_Y:
+                render.setRotateParam(new int[]{0, 1, 0});
+                break;
+            case ROTATE_Z:
+                render.setRotateParam(new int[]{0, 0, 1});
+                break;
+        }
+        requestRender();
     }
 
     @Override
