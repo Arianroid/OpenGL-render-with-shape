@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.arianroid.algorithmproject.MainActivity">
+    <item
+        android:id="@+id/first"
+        android:title="first"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/second"
+        android:title="second"
+        android:visible="true"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/third"
+        android:title="third"
+        android:visible="true"
+        app:showAsAction="never" />
+</menu>

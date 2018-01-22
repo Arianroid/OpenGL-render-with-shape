@@ -13,9 +13,13 @@ import javax.microedition.khronos.opengles.GL10;
 
 public class HelloESRender implements GLSurfaceView.Renderer {
 
-    float angle = 0.0f;
+    public static float angle = 0.0f;
     GL10 gl10;
     private FloatBuffer triangle;
+
+    public static void setAngle(float angle) {
+        HelloESRender.angle += angle;
+    }
 
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
@@ -37,12 +41,8 @@ public class HelloESRender implements GLSurfaceView.Renderer {
         gl10.glClearColor(0.0f, 0.3f, 0.0f, 0.5f);
 
 
-
-
-
         gl10.glVertexPointer(3, GL10.GL_FLOAT, 0, triangle);
         gl10.glDrawArrays(GL10.GL_TRIANGLES, 0, 3);
-
 
 
         // Set GL_MODELVIEW transformation mode
