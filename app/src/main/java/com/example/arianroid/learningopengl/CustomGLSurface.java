@@ -9,7 +9,7 @@ import android.view.MotionEvent;
 public class CustomGLSurface extends GLSurfaceView {
 
 
-    public HelloESRender render = new HelloESRender();
+    public CustomRender render = new CustomRender();
     private final float TOUCH_SCALE_FACTOR = 180.0f / 320;
     private float previousX;
     private float previousY;
