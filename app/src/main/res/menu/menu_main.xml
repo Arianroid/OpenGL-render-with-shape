@@ -4,17 +4,17 @@
     tools:context="com.example.arianroid.algorithmproject.MainActivity">
     <item
         android:id="@+id/first"
-        android:title="first"
+        android:title="X-Axis"
         android:visible="true"
         app:showAsAction="never" />
     <item
         android:id="@+id/second"
-        android:title="second"
+        android:title="Y-Axis"
         android:visible="true"
         app:showAsAction="never" />
     <item
         android:id="@+id/third"
-        android:title="third"
+        android:title="Z-Axis"
         android:visible="true"
         app:showAsAction="never" />
 </menu>
