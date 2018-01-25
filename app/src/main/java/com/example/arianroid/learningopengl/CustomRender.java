@@ -20,6 +20,7 @@ public class CustomRender implements GLSurfaceView.Renderer {
     private float[] rotateParam = new float[]{1f, 0f, 0f};
     private Triangle mTriangle;
     private float mAngle = 0.0f;
+    private boolean clockwiseRotation = false;
 
     static void checkGlError(String glOperation) {
         int error;
@@ -58,7 +59,6 @@ public class CustomRender implements GLSurfaceView.Renderer {
                 | GLES20.GL_DEPTH_BUFFER_BIT);
 
 
-
         // Set the camera position (View matrix)
         Matrix.setLookAtM(mViewMatrix, 0
                 , 0, 0, 5 //camera at (0, 0, 5)
@@ -72,9 +72,10 @@ public class CustomRender implements GLSurfaceView.Renderer {
 
         // mTriangle.draw(mMVPMatrix);
 
-
-        long time = SystemClock.uptimeMillis() % 4000L;
-        float angle = 0.090f * ((int) time);
+        if (clockwiseRotation) {
+            long time = SystemClock.uptimeMillis() % 4000L;
+            mAngle = 0.090f * ((int) time);
+        }
 
         Matrix.setRotateM(mRotationMatrix, 0, mAngle,
                 1, 1f, 0.5f);
@@ -134,6 +135,10 @@ public class CustomRender implements GLSurfaceView.Renderer {
 
     }
 */
+
+    public void setClockwaiseRotation(boolean rotationState) {
+        clockwiseRotation = rotationState;
+    }
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {

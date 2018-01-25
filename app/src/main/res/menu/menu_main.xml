@@ -3,18 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.arianroid.algorithmproject.MainActivity">
     <item
-        android:id="@+id/first"
+        android:id="@+id/X-Axis"
         android:title="X-Axis"
         android:visible="true"
         app:showAsAction="never" />
     <item
-        android:id="@+id/second"
+        android:id="@+id/Y-Axis"
         android:title="Y-Axis"
         android:visible="true"
         app:showAsAction="never" />
     <item
-        android:id="@+id/third"
-        android:title="Z-Axis"
+        android:id="@+id/Z_Axis"
+        android:title="3D Z-Axis"
         android:visible="true"
         app:showAsAction="never" />
 </menu>

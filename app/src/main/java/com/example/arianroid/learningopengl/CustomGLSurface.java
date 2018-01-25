@@ -13,6 +13,8 @@ public class CustomGLSurface extends GLSurfaceView {
     public CustomRender render = new CustomRender();
     private float previousX;
     private float previousY;
+    private float[] param;
+
 
     public CustomGLSurface(Context context) {
         super(context);
@@ -31,16 +33,25 @@ public class CustomGLSurface extends GLSurfaceView {
 
     }
 
+    public void set3DParam(float x,
+                           float y,
+                           float z) {
+        param = new float[]{x, y, z};
+
+    }
+
     public void setEnum(GLUenum glUenum) {
         switch (glUenum) {
             case ROTATE_X:
+                render.setClockwaiseRotation(false);
                 render.setRotateParam(new float[]{0f, 1f, 0f});
                 break;
             case ROTATE_Y:
+                render.setClockwaiseRotation(false);
                 render.setRotateParam(new float[]{1f, 0f, 0f});
                 break;
             case ROTATE_Z:
-                render.setRotateParam(new float[]{0f, 0f, 1f});
+                startClockwiseRotation();
                 break;
         }
         requestRender();
@@ -76,6 +87,12 @@ public class CustomGLSurface extends GLSurfaceView {
         previousY = y;
         previousX = x;
         return true;
+    }
+
+    public void startClockwiseRotation() {
+        render.setClockwaiseRotation(true);
+        render.setRotateParam(param);
+        requestRender();
     }
 }
 
