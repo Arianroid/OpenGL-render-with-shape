@@ -2,15 +2,17 @@ package com.example.arianroid.learningopengl;
 
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
-import android.opengl.GLU;
 import android.opengl.Matrix;
 import android.os.SystemClock;
+import android.util.Log;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+
+import static android.content.ContentValues.TAG;
 
 public class CustomRender implements GLSurfaceView.Renderer {
 
@@ -20,8 +22,16 @@ public class CustomRender implements GLSurfaceView.Renderer {
     private float[] mRotationMatrix = new float[16];
     private int[] rotateParam = new int[]{1, 0, 0};
     private Triangle mTriangle;
-    private float angle = 0.0f;
+    private float mAngle = 0.0f;
     private GL10 gl10;
+
+    static void checkGlError(String glOperation) {
+        int error;
+        while ((error = GLES20.glGetError()) != GLES20.GL_NO_ERROR) {
+            Log.e(TAG, glOperation + ": glError " + error);
+            throw new RuntimeException(glOperation + ": glError " + error);
+        }
+    }
 
     static int loadShader(int type, String shaderCode) {
 
@@ -40,72 +50,65 @@ public class CustomRender implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
         // Set the background frame color
-        GLES20.glClearColor(0.0f, 0.0f
-                , 0.0f, 1.0f);
-
-        // Enable use of vertex arrays
-        gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
+        GLES20.glClearColor(0.9f, 0.9f
+                , 1.0f, 0.2f);
 
         mTriangle = new Triangle();
     }
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        this.gl10 = gl;
-
-        //initShapes();
-        onDrawSimpleFrame();
-
-        GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT
-                | GLES20.GL_COLOR_BUFFER_BIT);
-
-
-        long time = SystemClock.uptimeMillis() % 10000L;
-        float angleInDegrees = (360.0f / 10000.0f) * ((int) time);
-
-        // Draw the triangle facing straight on.
-        Matrix.setIdentityM(mMVPMatrix, 0);
-        Matrix.rotateM(mMVPMatrix, 0, angleInDegrees, 0.0f, 0.0f, 1.0f);
-
-        //onDrawRotateFrame(unused);
-    }
-
-    private void onDrawSimpleFrame() {
-        // Redraw background color
         float[] scratch = new float[16];
+        // Draw background color
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+        // Set the camera position (View matrix)
+        Matrix.setLookAtM(mViewMatrix, 0, 0, 0, -3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+        // Calculate the projection and view transformation
+        Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
+        // Draw square
 
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
+     //   mTriangle.draw(mMVPMatrix);
 
-        // Create a rotation transformation for the triangleFloatBuffer
+        // Create a rotation for the triangle
+        // Use the following code to generate constant rotation.
+        // Leave this code out when using TouchEvents.
         // long time = SystemClock.uptimeMillis() % 4000L;
         // float angle = 0.090f * ((int) time);
-        Matrix.setRotateM(mRotationMatrix, 0
-                , angle, 0, 0, -1.0f);
-
+        Matrix.setRotateM(mRotationMatrix, 0, mAngle, 0, 0, 1.0f);
         // Combine the rotation matrix with the projection and camera view
         // Note that the mMVPMatrix factor *must be first* in order
         // for the matrix multiplication product to be correct.
-        Matrix.multiplyMM(scratch, 0
-                , mMVPMatrix, 0, mRotationMatrix, 0);
-
-        // Draw triangleFloatBuffer
-        mTriangle.draw(scratch);
-
-        mTriangle.draw();
-
-        // Set the camera position (View matrix)
-        Matrix.setLookAtM(mViewMatrix, 0
-                , 0, 0, -3
-                , 0f, 0f, 0f
-                , 0f, 1.0f, 0.0f);
-
-        // Calculate the projection and view transformation
-        Matrix.multiplyMM(mMVPMatrix, 0
-                , mProjectionMatrix, 0
-                , mViewMatrix, 0);
-
-        // Draw shape
+        Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
+        // Draw triangle
+      //  mSquare.draw(scratch);
         mTriangle.draw(mMVPMatrix);
+
+    }
+
+    private void onDrawSimpleFrame() {
+        float[] scratch = new float[16];
+        // Draw background color
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+        // Set the camera position (View matrix)
+        Matrix.setLookAtM(mViewMatrix, 0, 0, 0, -3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+        // Calculate the projection and view transformation
+        Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
+        // Draw square
+        mTriangle.draw(mMVPMatrix);
+
+
+        // Create a rotation for the triangle
+        // Use the following code to generate constant rotation.
+        // Leave this code out when using TouchEvents.
+        // long time = SystemClock.uptimeMillis() % 4000L;
+        // float angle = 0.090f * ((int) time);
+        Matrix.setRotateM(mRotationMatrix, 0, mAngle, 0, 0, 1.0f);
+        // Combine the rotation matrix with the projection and camera view
+        // Note that the mMVPMatrix factor *must be first* in order
+        // for the matrix multiplication product to be correct.
+        Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
+        // Draw triangle
+        //mSquare.draw(scratch);
 
     }
 
@@ -129,18 +132,18 @@ public class CustomRender implements GLSurfaceView.Renderer {
         vbb.order(ByteOrder.nativeOrder());
 
         //create a floating point buffer from   the ByteBuffer
-      //  triangleFloatBuffer = vbb.asFloatBuffer();
+        //  triangleFloatBuffer = vbb.asFloatBuffer();
 
-     //   //add the coordinates to the FloatBuffer
-      //  triangleFloatBuffer.put(vertices);
+        //   //add the coordinates to the FloatBuffer
+        //  triangleFloatBuffer.put(vertices);
 
         //set the buffer to read the first vertex coordinates
-      //  triangleFloatBuffer.position(0);
+        //  triangleFloatBuffer.position(0);
 
     }
 
     void setAngle(float angle) {
-        this.angle += angle;
+        this.mAngle += angle;
     }
 
     void changeColorWithClearUI() {

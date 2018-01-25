@@ -16,16 +16,18 @@ public class CustomGLSurface extends GLSurfaceView {
 
     public CustomGLSurface(Context context) {
         super(context);
+        setEGLContextClientVersion(2);
         setRenderer(render);
         //Render the view  only when there is a change
-        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+       // setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
 
     public CustomGLSurface(Context context, AttributeSet attrs) {
         super(context, attrs);
+        setEGLContextClientVersion(2);
         setRenderer(render);
         //Render the view  only when there is a change
-        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+      //  setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
 
     }
 
