@@ -34,13 +34,13 @@ public class CustomGLSurface extends GLSurfaceView {
     public void setEnum(GLUenum glUenum) {
         switch (glUenum) {
             case ROTATE_X:
-                render.setRotateParam(new int[]{1, 0, 0});
+                render.setRotateParam(new float[]{1f, 0f, 0f});
                 break;
             case ROTATE_Y:
-                render.setRotateParam(new int[]{0, 1, 0});
+                render.setRotateParam(new float[]{0f, 1f, 0f});
                 break;
             case ROTATE_Z:
-                render.setRotateParam(new int[]{0, 0, 1});
+                render.setRotateParam(new float[]{0f, 0f, 1f});
                 break;
         }
         requestRender();

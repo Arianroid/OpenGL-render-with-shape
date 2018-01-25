@@ -19,11 +19,10 @@ public class CustomRender implements GLSurfaceView.Renderer {
     private final float[] mMVPMatrix = new float[16];
     private final float[] mProjectionMatrix = new float[16];
     private final float[] mViewMatrix = new float[16];
-    private float[] mRotationMatrix = new float[16];
-    private int[] rotateParam = new int[]{1, 0, 0};
+    private final float[] mRotationMatrix = new float[16];
+    private float[] rotateParam = new float[]{1f, 0f, 0f};
     private Triangle mTriangle;
     private float mAngle = 0.0f;
-    private GL10 gl10;
 
     static void checkGlError(String glOperation) {
         int error;
@@ -60,28 +59,38 @@ public class CustomRender implements GLSurfaceView.Renderer {
     public void onDrawFrame(GL10 gl) {
         float[] scratch = new float[16];
         // Draw background color
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT
+                | GLES20.GL_DEPTH_BUFFER_BIT);
         // Set the camera position (View matrix)
-        Matrix.setLookAtM(mViewMatrix, 0, 0, 0, -3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
+        Matrix.setLookAtM(mViewMatrix, 0
+                , 0, 0, -3, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
         // Calculate the projection and view transformation
-        Matrix.multiplyMM(mMVPMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
-        // Draw square
+        Matrix.multiplyMM(mMVPMatrix, 0
+                , mProjectionMatrix, 0, mViewMatrix, 0);
 
-     //   mTriangle.draw(mMVPMatrix);
+        // Draw square
+        // mTriangle.draw(mMVPMatrix);
 
         // Create a rotation for the triangle
         // Use the following code to generate constant rotation.
         // Leave this code out when using TouchEvents.
-        // long time = SystemClock.uptimeMillis() % 4000L;
-        // float angle = 0.090f * ((int) time);
-        Matrix.setRotateM(mRotationMatrix, 0, mAngle, 0, 0, 1.0f);
+
+        long time = SystemClock.uptimeMillis() % 4000L;
+        float angle = 0.090f * ((int) time);
+
+        Matrix.setRotateM(mRotationMatrix, 0, mAngle,
+                rotateParam[0], rotateParam[1], rotateParam[2]);
+
         // Combine the rotation matrix with the projection and camera view
         // Note that the mMVPMatrix factor *must be first* in order
         // for the matrix multiplication product to be correct.
-        Matrix.multiplyMM(scratch, 0, mMVPMatrix, 0, mRotationMatrix, 0);
+        Matrix.multiplyMM(scratch, 0, mMVPMatrix
+                , 0, mRotationMatrix, 0);
+
+
         // Draw triangle
-      //  mSquare.draw(scratch);
-        mTriangle.draw(mMVPMatrix);
+        //  mSquare.draw(scratch);
+        mTriangle.draw(scratch);
 
     }
 
@@ -112,7 +121,7 @@ public class CustomRender implements GLSurfaceView.Renderer {
 
     }
 
-    void setRotateParam(int[] rotateParam) {
+    void setRotateParam(float[] rotateParam) {
         this.rotateParam = rotateParam;
     }
 
@@ -148,14 +157,14 @@ public class CustomRender implements GLSurfaceView.Renderer {
 
     void changeColorWithClearUI() {
         //Redraw background color
-        gl10.glClear(GL10.GL_COLOR_BUFFER_BIT
-                | GL10.GL_DEPTH_BUFFER_BIT);
+        //  gl10.glClear(GL10.GL_COLOR_BUFFER_BIT
+        //    | GL10.GL_DEPTH_BUFFER_BIT);
 
 
-        gl10.glClearColor(0.7f, 0.0f, 0.0f, 0f);
+        //   gl10.glClearColor(0.7f, 0.0f, 0.0f, 0f);
 
-        gl10.glClear(GL10.GL_COLOR_BUFFER_BIT
-                | GL10.GL_DEPTH_BUFFER_BIT);
+        //   gl10.glClear(GL10.GL_COLOR_BUFFER_BIT
+        //     | GL10.GL_DEPTH_BUFFER_BIT);
 
     }
 
