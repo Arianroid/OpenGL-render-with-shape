@@ -9,8 +9,8 @@ import android.view.MotionEvent;
 public class CustomGLSurface extends GLSurfaceView {
 
 
-    public CustomRender render = new CustomRender();
     private final float TOUCH_SCALE_FACTOR = 180.0f / 320;
+    public CustomRender render = new CustomRender();
     private float previousX;
     private float previousY;
 
@@ -19,7 +19,7 @@ public class CustomGLSurface extends GLSurfaceView {
         setEGLContextClientVersion(2);
         setRenderer(render);
         //Render the view  only when there is a change
-       // setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
 
     public CustomGLSurface(Context context, AttributeSet attrs) {
@@ -27,17 +27,17 @@ public class CustomGLSurface extends GLSurfaceView {
         setEGLContextClientVersion(2);
         setRenderer(render);
         //Render the view  only when there is a change
-      //  setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
 
     }
 
     public void setEnum(GLUenum glUenum) {
         switch (glUenum) {
             case ROTATE_X:
-                render.setRotateParam(new float[]{1f, 0f, 0f});
+                render.setRotateParam(new float[]{0f, 1f, 0f});
                 break;
             case ROTATE_Y:
-                render.setRotateParam(new float[]{0f, 1f, 0f});
+                render.setRotateParam(new float[]{1f, 0f, 0f});
                 break;
             case ROTATE_Z:
                 render.setRotateParam(new float[]{0f, 0f, 1f});
