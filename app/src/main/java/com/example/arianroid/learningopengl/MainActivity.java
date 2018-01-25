@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     private CustomGLSurface mGLView;
     private EditText etX, etY, etZ;
-    private float x = 1f, y = 1f, z = 1f;
+    private float x, y, z;
     private Button rotateBtn;
 
     @Override
