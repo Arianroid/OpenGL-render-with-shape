@@ -16,6 +16,10 @@ public class CustomGLSurface extends GLSurfaceView {
     private float[] param;
 
 
+
+
+
+
     public CustomGLSurface(Context context) {
         super(context);
         setEGLContextClientVersion(2);

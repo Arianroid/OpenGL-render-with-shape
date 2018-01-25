@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,18 +24,16 @@ public class MainActivity extends AppCompatActivity {
         Thread.setDefaultUncaughtExceptionHandler(
                 new OpenGLUncatchExceptionHandler(this));
 
-        mGLView = (CustomGLSurface) findViewById(R.id.mainGlSurfaceView);
-        rotateBtn = (Button) findViewById(R.id.btnClockWise);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mGLView = (CustomGLSurface) findViewById(R.id.mainGlSurfaceView);
+        rotateBtn = (Button) findViewById(R.id.btnClockWise);
         etX = (EditText) findViewById(R.id.xFloat);
         etY = (EditText) findViewById(R.id.yFloat);
         etZ = (EditText) findViewById(R.id.zFloat);
 
-        x = Float.parseFloat(etX.getText().toString());
-        y = Float.parseFloat(etY.getText().toString());
-        z = Float.parseFloat(etZ.getText().toString());
+
         rotateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,6 +41,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void init3DParamConvertion() {
+        try {
+            x = Float.parseFloat(etX.getText().toString());
+            y = Float.parseFloat(etY.getText().toString());
+            z = Float.parseFloat(etZ.getText().toString());
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "مشکل در مقادیر ارسالی", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -61,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 mGLView.setEnum(GLUenum.ROTATE_Y);
                 break;
             case R.id.Z_Axis:
+                init3DParamConvertion();
                 mGLView.set3DParam(x, y, z);
                 mGLView.setEnum(GLUenum.ROTATE_Z);
                 break;

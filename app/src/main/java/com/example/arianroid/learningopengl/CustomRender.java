@@ -78,7 +78,7 @@ public class CustomRender implements GLSurfaceView.Renderer {
         }
 
         Matrix.setRotateM(mRotationMatrix, 0, mAngle,
-                1, 1f, 0.5f);
+                rotateParam[0], rotateParam[1], rotateParam[2]);
 
 
         // Combine the rotation matrix with the projection and camera view
@@ -86,6 +86,7 @@ public class CustomRender implements GLSurfaceView.Renderer {
         // for the matrix multiplication product to be correct.
         Matrix.multiplyMM(scratch, 0, mMVPMatrix
                 , 0, mRotationMatrix, 0);
+
 
         //  mSquare.draw(scratch);
         mTriangle.draw(scratch);
