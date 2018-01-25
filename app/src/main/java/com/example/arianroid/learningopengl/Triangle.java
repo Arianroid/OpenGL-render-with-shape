@@ -43,6 +43,11 @@ public class Triangle {
     private int mPositionHandle;
     private int mColorHandle;
     private FloatBuffer vertexBuffer;
+
+    public void setColor(float[] color) {
+        this.color = color;
+    }
+
     // Use to access and set the view transformation
     private int mMVPMatrixHandle;
 

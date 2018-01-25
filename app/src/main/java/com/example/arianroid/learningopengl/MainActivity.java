@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         rotateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mGLView.changeRenderTriangleColor(new  float[]{1f,0f,0f,0.5f});
                 mGLView.startClockwiseRotation();
             }
         });

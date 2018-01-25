@@ -27,6 +27,9 @@ public class CustomGLSurface extends GLSurfaceView {
         //Render the view  only when there is a change
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
+    public void changeRenderTriangleColor(float[] newColor){
+        render.changeColor(newColor);
+    }
 
     public CustomGLSurface(Context context, AttributeSet attrs) {
         super(context, attrs);

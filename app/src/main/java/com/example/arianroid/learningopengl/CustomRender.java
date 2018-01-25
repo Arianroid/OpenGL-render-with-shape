@@ -29,6 +29,9 @@ public class CustomRender implements GLSurfaceView.Renderer {
             throw new RuntimeException(glOperation + ": glError " + error);
         }
     }
+    public void changeColor(float[] newColor){
+        mTriangle.setColor(newColor);
+    }
 
     static int loadShader(int type, String shaderCode) {
 
