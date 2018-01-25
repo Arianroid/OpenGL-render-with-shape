@@ -50,7 +50,11 @@ public class MainActivity extends AppCompatActivity {
             z = Float.parseFloat(etZ.getText().toString());
         } catch (NumberFormatException e) {
             Toast.makeText(this, "مشکل در مقادیر ارسالی", Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        mGLView.set3DParam(x, y, z);
+        mGLView.setEnum(GLUenum.ROTATE_Z);
     }
 
     @Override
@@ -71,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.Z_Axis:
                 init3DParamConvertion();
-                mGLView.set3DParam(x, y, z);
-                mGLView.setEnum(GLUenum.ROTATE_Z);
                 break;
         }
 

@@ -55,7 +55,8 @@ public class CustomGLSurface extends GLSurfaceView {
                 render.setRotateParam(new float[]{1f, 0f, 0f});
                 break;
             case ROTATE_Z:
-                startClockwiseRotation();
+                render.setClockwaiseRotation(false);
+                render.setRotateParam(param);
                 break;
         }
         requestRender();
@@ -95,7 +96,6 @@ public class CustomGLSurface extends GLSurfaceView {
 
     public void startClockwiseRotation() {
         render.setClockwaiseRotation(true);
-        render.setRotateParam(param);
         requestRender();
     }
 }
