@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@color/colorPrimary"
         android:gravity="bottom">
 
@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:layout_margin="4dp"
             android:layout_weight="1"
-            android:background="#FFF"
+            android:background="#fcfbed"
             android:gravity="center"
             android:hint="X - float " />
 
@@ -29,7 +29,7 @@
             android:layout_height="match_parent"
             android:layout_margin="4dp"
             android:layout_weight="1"
-            android:background="#FFF"
+            android:background="#fcfbed"
             android:gravity="center"
             android:hint="Y - float " />
 
@@ -39,7 +39,7 @@
             android:layout_height="match_parent"
             android:layout_margin="4dp"
             android:layout_weight="1"
-            android:background="#FFF"
+            android:background="#fcfbed"
             android:gravity="center"
             android:hint="Z - float " />
 
@@ -48,12 +48,12 @@
 
     <Button
         android:id="@+id/btnClockWise"
-        android:layout_width="125dp"
-        android:layout_height="65dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_gravity="center"
         android:layout_margin="4dp"
-        android:background="#FFF"
+        android:background="#fcfbed"
         android:gravity="center"
         android:text="Clockwise rotation"
-        android:textSize="15sp" />
+        android:textSize="13sp" />
 </LinearLayout>
