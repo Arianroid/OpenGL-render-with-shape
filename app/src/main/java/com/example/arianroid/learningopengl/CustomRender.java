@@ -48,8 +48,8 @@ public class CustomRender implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
-        GLES20.glClearColor(0.9f, 0.9f
-                , 1.0f, 0.2f);
+        GLES20.glClearColor(0.0f, 0.0f
+                , 0.0f, 0.0f);
 
         mTriangle = new Triangle();
     }

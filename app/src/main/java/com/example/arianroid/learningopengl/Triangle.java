@@ -38,8 +38,11 @@ public class Triangle {
                     // for the matrix multiplication product to be correct.
                     "  gl_Position = uMVPMatrix * vPosition;" +
                     "}";
+
+
+
     // Set color with red, green, blue and alpha (opacity) values
-    float color[] = {0.2f, 0.2f, 0.9f, 0.5f};
+    float color[] = {0.95f,0.96f,0.8f,0.0f};
     private int mPositionHandle;
     private int mColorHandle;
     private FloatBuffer vertexBuffer;
